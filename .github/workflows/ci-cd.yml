@@ -50,7 +50,7 @@ jobs:
       - name: Deploy via rsync
         uses: burnett01/rsync-deployments@v8
         with:
-          switches: |
+          switches: >
             -avzr
             --delete
             --exclude='.error/'
