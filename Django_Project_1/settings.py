@@ -21,15 +21,30 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(BASE_DIR / '.env')
 
+def env_bool(值, 默认=False):
+    if 值 is None:
+        return 默认
+    if isinstance(值, bool):  # 如果已经是布尔值，直接返回
+        return 值
+    if isinstance(值, (int, float)):  # 数字类型
+        return 值 != 0
+    if isinstance(值, str):
+        值 = 值.lower().strip()
+        if 值 in ('true', '1', 'yes', 'on', 't', 'y'):
+            return True
+        if 值 in ('false', '0', 'no', 'off', 'f', 'n'):
+            return False
+    return 默认
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env_bool(env('DEBUG'))
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '119.45.129.30']
 
