@@ -14,6 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from os import getenv as env
 import os
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,6 +58,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Django_Project_1.urls'
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    'http://119.45.129.30:8008',
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -92,9 +99,18 @@ DATABASES = {
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
+        'TEST': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:'
+        }
     },
 }
 
+if 'test' in sys.argv or 'testserver' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

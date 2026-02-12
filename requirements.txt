@@ -1,0 +1,4 @@
+# Django项目依赖包
+Django==4.2.10
+dotenv==0.9.9
+pymysql==1.1.2
