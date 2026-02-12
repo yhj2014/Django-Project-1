@@ -50,16 +50,7 @@ jobs:
       - name: Deploy via rsync
         uses: burnett01/rsync-deployments@v8
         with:
-          switches: >
-            -avzr
-            --delete
-            --exclude='.error/'
-            --exclude='.git/'
-            --exclude='.github/'
-            --exclude='.vscode/'
-            --exclude='.gitignore'
-            --exclude='**/__pycache__/'
-            --exclude='.env'
+          switches: -avzr --exclude='.error/' --exclude='.git/' --exclude='.github/' --exclude='.vscode/' --exclude='.gitignore' --exclude='**/__pycache__/' --exclude='.env'
           path: ./
           remote_path: /www/site/DPF/
           remote_host: ${{ secrets.SERVER_HOST }}
