@@ -4,9 +4,12 @@ from .form import TestForm
 def index(request):
     if request.method == 'POST':
         form = TestForm(request.POST)
-        if form.is_valid:
-            pass
+        if form.is_valid():
+            # 获取表单数据
+            name = form.cleaned_data['name']
+            age = form.cleaned_data['age']
+            # 跳转到结果页
+            return render(request, 'app/result.html', context={'name': name, 'age': age})
     else:
         form = TestForm()
-        render(request, 'index.html', context={'form': form})
-        
+    return render(request, 'index.html', context={'form': form})

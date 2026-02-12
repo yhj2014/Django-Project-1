@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}提交结果{% endblock %}
+
+{% block header %}提交成功！{% endblock %}
+
+{% block content %}
+    <div>
+        <p><strong>姓名：</strong>{{ name }}</p>
+        <p><strong>年龄：</strong>{{ age }}</p>
+    </div>
+    <a href="{% url 'index' %}">返回表单</a>
+{% endblock %}
